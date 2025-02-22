@@ -3,8 +3,6 @@
 	import "../global.css";
 	import "../utilities.css";
 
-	export const prerender = true;
-
 	interface Props {
 		children?: import("svelte").Snippet;
 	}

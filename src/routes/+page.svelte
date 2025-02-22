@@ -19,6 +19,7 @@
 	import Label from "$lib/components/Label.svelte";
 	import Pagination from "$lib/components/Pagination.svelte";
 	import Toggle from "$lib/components/Toggle.svelte";
+	import { fly, slide } from "svelte/transition";
 
 	let auth = $state(false);
 	let name = $state("");
@@ -146,7 +147,9 @@
 				credentials: "include"
 			});
 
-			dogs = dogsResponse;
+			document.startViewTransition(() => {
+				dogs = dogsResponse;
+			});
 
 			for (let dog of dogs) {
 				if (dog.zip_code) {
@@ -400,7 +403,7 @@
 			{#if filteredDogs.length > 0}
 				<div id="dogs" class="dogs-container">
 					{#each filteredDogs as dog}
-						<article class="dog-card">
+						<article class="dog-card" transition:fly>
 							<img src={dog.img} alt={dog.name} />
 							<div class="stack half">
 								<strong class="text-lg">{dog.name}</strong>
@@ -547,6 +550,7 @@
 			box-shadow: 0 2px 4px hsl(var(--accent-color), 70%, 70%);
 			background-color: #fff;
 			text-align: center;
+			view-timeline-name: dogs-transition;
 
 			img {
 				width: 18rem;
@@ -585,6 +589,18 @@
 		border-radius: 0.5rem;
 		box-shadow: 0 2px 8px hsl(var(--accent-color), 20%, 60%);
 		padding: 2rem;
+
+		&[open] {
+			opacity: 1;
+			transition:
+				opacity 0.3s ease-in-out,
+				transform 0.3s ease-in-out;
+
+			@starting-style {
+				opacity: 0;
+				transform: translateX(-10rem);
+			}
+		}
 
 		img {
 			width: 20rem;
