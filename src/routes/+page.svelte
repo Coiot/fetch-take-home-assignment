@@ -174,19 +174,19 @@
 		}
 	}
 
-	function ResetPage() {
+	async function ResetPage() {
 		currentPage = 1;
-		GetDogs();
+		await GetDogs();
 	}
 
-	function ToggleSortField(field: string) {
+	async function ToggleSortField(field: string) {
 		if (sortField === field) {
 			sortDirection = sortDirection === "asc" ? "desc" : "asc";
 		} else {
 			sortField = field;
 			sortDirection = "asc";
 		}
-		GetDogs();
+		await GetDogs();
 	}
 
 	function ToggleFavorite(dogId: string) {

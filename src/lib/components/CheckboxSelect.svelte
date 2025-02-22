@@ -116,6 +116,7 @@
 	const HandleRemove = (item: Option) => {
 		if (Array.isArray(value)) {
 			value = value.filter((val) => val !== item[optionValue]);
+			onchange();
 		}
 	};
 
