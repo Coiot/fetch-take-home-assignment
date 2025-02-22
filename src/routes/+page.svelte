@@ -580,7 +580,6 @@
 	.match-dialog {
 		max-inline-size: 25rem;
 		position: absolute;
-		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		text-align: center;
@@ -592,13 +591,14 @@
 
 		&[open] {
 			opacity: 1;
+			top: 50%;
 			transition:
-				opacity 0.3s ease-in-out,
-				transform 0.3s ease-in-out;
+				opacity 0.4s ease-in-out,
+				top 0.25s ease-in-out;
 
 			@starting-style {
 				opacity: 0;
-				transform: translateX(-10rem);
+				top: -10%;
 			}
 		}
 
@@ -626,7 +626,7 @@
 		}
 	}
 
-	:global(main:has(dialog[open])) {
+	:global(html:has(dialog[open])) {
 		overflow: hidden;
 	}
 </style>
