@@ -11,6 +11,7 @@
 - Responsive design
 - Some few cute touches
 - Snippets of my own CSS starter and Svelte UI components (open-source pending soon™️)
+- Icons from [Lucide](https://lucide.dev)
 - Slim as possible
 
 ## Deploy Your Own

@@ -210,7 +210,7 @@
 					credentials: "include"
 				});
 				matchedDogId = response.match;
-			} while (matchedDogId === lastMatchedDogId);
+			} while ($favoriteDogs.length > 1 && matchedDogId === lastMatchedDogId);
 
 			lastMatchedDogId = matchedDogId;
 
@@ -596,13 +596,17 @@
 			margin-block: 1rem;
 
 			@media (max-width: 60rem) {
-				width: 15rem;
-				height: 15rem;
+				width: 12rem;
+				height: 12rem;
 			}
 		}
 
 		&::backdrop {
 			background-color: hsla(var(--accent-color) 60% 10% / 0.5);
+		}
+
+		@media (max-width: 60rem) {
+			padding: 1rem;
 		}
 	}
 
