@@ -124,40 +124,40 @@
 		}
 
 		try {
-			let queryParams = new URLSearchParams();
-			if (selectedBreeds.length > 0) selectedBreeds.forEach((breed) => queryParams.append("breeds", breed));
-			if (minAge) queryParams.append("ageMin", minAge.toString());
-			if (maxAge) queryParams.append("ageMax", maxAge.toString());
-			if (selectedZipcodes) queryParams.append("zipCodes", selectedZipcodes);
-			queryParams.append("size", dogsPerPage.toString());
-			queryParams.append("from", ((currentPage - 1) * dogsPerPage).toString());
-			queryParams.append("sort", `${sortField}:${sortDirection}`);
+			document.startViewTransition(async () => {
+				let queryParams = new URLSearchParams();
+				if (selectedBreeds.length > 0) selectedBreeds.forEach((breed) => queryParams.append("breeds", breed));
+				if (minAge) queryParams.append("ageMin", minAge.toString());
+				if (maxAge) queryParams.append("ageMax", maxAge.toString());
+				if (selectedZipcodes) queryParams.append("zipCodes", selectedZipcodes);
+				queryParams.append("size", dogsPerPage.toString());
+				queryParams.append("from", ((currentPage - 1) * dogsPerPage).toString());
+				queryParams.append("sort", `${sortField}:${sortDirection}`);
 
-			let response: { resultIds: string[]; total: number } = await DoGet(
-				`${API_URL}/dogs/search?${queryParams.toString()}`,
-				{
+				let response: { resultIds: string[]; total: number } = await DoGet(
+					`${API_URL}/dogs/search?${queryParams.toString()}`,
+					{
+						credentials: "include"
+					}
+				);
+
+				dogIDs = response.resultIds;
+				totalDogs = response.total;
+
+				let dogsResponse: Dog[] = await DoFetch(`${API_URL}/dogs/`, dogIDs, false, {
 					credentials: "include"
-				}
-			);
+				});
 
-			dogIDs = response.resultIds;
-			totalDogs = response.total;
-
-			let dogsResponse: Dog[] = await DoFetch(`${API_URL}/dogs/`, dogIDs, false, {
-				credentials: "include"
-			});
-
-			document.startViewTransition(() => {
 				dogs = dogsResponse;
-			});
 
-			for (let dog of dogs) {
-				if (dog.zip_code) {
-					const { city, state } = await GetCityState(dog.zip_code);
-					dog.city = city;
-					dog.state = state;
+				for (let dog of dogs) {
+					if (dog.zip_code) {
+						const { city, state } = await GetCityState(dog.zip_code);
+						dog.city = city;
+						dog.state = state;
+					}
 				}
-			}
+			});
 		} catch (error) {
 			console.error("Failed to fetch dogs:", error);
 		}
