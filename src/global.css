@@ -1,0 +1,89 @@
+:root {
+	--accent-color: 35;
+	--primary-text-color: #222;
+	--warning-red-color: hsl(0 80% 45%);
+	--error-orange-color: hsl(30 80% 55%);
+	--highlight-yellow-color: hsl(50 100% 65%);
+	--success-green-color: hsl(150 45% 50%);
+	--success-dark-green-color: hsl(150 45% 40%);
+	--action-blue-color: hsl(210 80% 50%);
+	--attention-purple-color: hsl(280 70% 60%);
+}
+
+* {
+	font-family: Verdana, Tahoma, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.tabs li {
+	font-variant: petite-caps;
+}
+
+h1,
+h2,
+h3,
+p,
+strong,
+label,
+textarea {
+	color: var(--primary-text-color);
+}
+
+label,
+strong {
+	font-weight: 600;
+}
+
+/* Coiot CSS Select Appearance Styles */
+.selects-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	gap: 1rem;
+}
+
+.selects-container select {
+	min-width: 12rem;
+}
+
+.select {
+	appearance: none;
+	min-width: fit-content;
+	width: 100%;
+	min-height: 1.75rem;
+	background-color: #fbfbfb;
+	border: 1px solid #aaa;
+	border-radius: 0.25rem;
+	background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='selectSVG' fill='currentColor' viewBox='0 0 16 16' stroke='currentColor' stroke-width='1'> <path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' /> </svg>")
+		no-repeat;
+	background-position: right 8px top 50%;
+	padding-inline: 0.5rem 2rem !important;
+}
+
+.select:hover {
+	color: #fff;
+	background-color: #444 !important;
+	background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='selectSVG' fill='white' viewBox='0 0 16 16' stroke='white' stroke-width='1'> <path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z' /> </svg>")
+		no-repeat;
+	background-position: right 0.5rem top 0.35rem;
+}
+
+.select option {
+	color: #444;
+	font-size: 1rem;
+	font-weight: 600;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.select option:checked,
+.select option:active,
+.select option:hover {
+	color: #fff;
+	background-color: #444;
+	box-shadow: 0 0 100px #444;
+}
